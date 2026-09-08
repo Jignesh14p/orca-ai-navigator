@@ -85,7 +85,7 @@ export const fishingZones: FishingZone[] = [
     note: "Conservation restriction detected — coral and turtle nesting sector.",
     lat: 13.402,
     lon: 80.468,
-    x: 84,
+    x: 79,
     y: 22,
   },
 ];
