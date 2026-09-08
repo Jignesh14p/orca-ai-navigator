@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiRouteImport } from './routes/ai'
+import { Route as FishRouteImport } from './routes/fish'
 import { Route as IntelligenceProcessRouteImport } from './routes/intelligence-process'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as VoiceRouteImport } from './routes/voice'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AiRoute = AiRouteImport.update({
   id: '/ai',
   path: '/ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FishRoute = FishRouteImport.update({
+  id: '/fish',
+  path: '/fish',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntelligenceProcessRoute = IntelligenceProcessRouteImport.update({
@@ -34,39 +42,83 @@ const MapRoute = MapRouteImport.update({
   path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoiceRoute = VoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/fish': typeof FishRoute
   '/intelligence-process': typeof IntelligenceProcessRoute
   '/map': typeof MapRoute
+  '/safety': typeof SafetyRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/fish': typeof FishRoute
   '/intelligence-process': typeof IntelligenceProcessRoute
   '/map': typeof MapRoute
+  '/safety': typeof SafetyRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ai': typeof AiRoute
+  '/fish': typeof FishRoute
   '/intelligence-process': typeof IntelligenceProcessRoute
   '/map': typeof MapRoute
+  '/safety': typeof SafetyRoute
+  '/voice': typeof VoiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai' | '/intelligence-process' | '/map'
+  fullPaths:
+    | '/'
+    | '/ai'
+    | '/fish'
+    | '/intelligence-process'
+    | '/map'
+    | '/safety'
+    | '/voice'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai' | '/intelligence-process' | '/map'
-  id: '__root__' | '/' | '/ai' | '/intelligence-process' | '/map'
+  to:
+    | '/'
+    | '/ai'
+    | '/fish'
+    | '/intelligence-process'
+    | '/map'
+    | '/safety'
+    | '/voice'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai'
+    | '/fish'
+    | '/intelligence-process'
+    | '/map'
+    | '/safety'
+    | '/voice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiRoute: typeof AiRoute
+  FishRoute: typeof FishRoute
   IntelligenceProcessRoute: typeof IntelligenceProcessRoute
   MapRoute: typeof MapRoute
+  SafetyRoute: typeof SafetyRoute
+  VoiceRoute: typeof VoiceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fish': {
+      id: '/fish'
+      path: '/fish'
+      fullPath: '/fish'
+      preLoaderRoute: typeof FishRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/intelligence-process': {
       id: '/intelligence-process'
       path: '/intelligence-process'
@@ -99,14 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/voice': {
+      id: '/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof VoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiRoute: AiRoute,
+  FishRoute: FishRoute,
   IntelligenceProcessRoute: IntelligenceProcessRoute,
   MapRoute: MapRoute,
+  SafetyRoute: SafetyRoute,
+  VoiceRoute: VoiceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
